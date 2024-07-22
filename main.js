@@ -4,7 +4,7 @@ import fastifyCors from "@fastify/cors"
 const server = fastify()
 server.register(fastifyCors)
 
-server.get("/", (req, reply) => {
+server.get("/api", (req, reply) => {
     return "Hello World!"
 })
 
