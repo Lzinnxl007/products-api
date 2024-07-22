@@ -1,15 +1,19 @@
-import fastify from "fastify"
-import fastifyCors from "@fastify/cors"
+import express from "express"
+const app = express();
+const port = process.env.PORT || 3000;
 
-const server = fastify()
-server.register(fastifyCors)
+app.use(express.json());
 
-server.get("/api", (req, reply) => {
-    reply.send("Hello World!")
-})
+// Define your API routes
+app.get('/api/hello', (req, res) => {
+  res.status(200).json({ message: "Hello, World!" });
+});
 
-server.listen({
-    port: 3000,
-}, () => {
-    console.log("Server running...")
-})
+// Catch all other routes and return a 404 response
+app.use((req, res) => {
+  res.status(404).json({ message: "Not found" });
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
