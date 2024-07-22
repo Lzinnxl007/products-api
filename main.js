@@ -5,7 +5,7 @@ const server = fastify()
 server.register(fastifyCors)
 
 server.get("/api", (req, reply) => {
-    return "Hello World!"
+    reply.send("Hello World!")
 })
 
 server.listen({
