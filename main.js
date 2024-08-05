@@ -10,23 +10,28 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = join(__filename, "..");
+const __dirname = join(__filename, "../assets");
 
-const filePath = path.join(__dirname, "products.txt");
+const xbz_path = path.join(__dirname, "xbz.txt");
+const spot_path = path.join(__dirname, "spot.txt");
 
-app.get("/api/products", (req, res) => {
-  fs.readFile(filePath, "utf8", (err, data) => {
+app.get("/api/products/xbz", (req, res) => {
+  fs.readFile(xbz_path, "utf8", (err, data) => {
     if (err) {
       console.error("Error reading the file:", err);
       return;
     }
+    res.status(200).json(JSON.parse(data));
+  });
+});
 
-    try {
-      const products = JSON.parse(data);
-      res.status(200).json(products);
-    } catch (parseError) {
-      console.error("Error parsing JSON:", parseError);
+app.get("/api/products/spot", (req, res) => {
+  fs.readFile(spot_path, "utf-8", (err, data) => {
+    if (err) {
+      console.error("Error reading the file:", err);
+      return;
     }
+    res.status(200).json(JSON.parse(data));
   });
 });
 
