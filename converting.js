@@ -12,6 +12,8 @@ const products_response = await fetch(`http://ws.spotgifts.com.br/api/v1/product
 
 const products = await products_response.json()
 
+console.log(products)
+
 fs.writeFile("spot.txt", JSON.stringify(products), (err) => {
     if(err) {
         console.log(err)

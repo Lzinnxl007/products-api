@@ -14,6 +14,7 @@ const __dirname = join(__filename, "../assets");
 
 const xbz_path = path.join(__dirname, "xbz.txt");
 const spot_path = path.join(__dirname, "spot.txt");
+const somarcas_path = path.join(__dirname, "somarcas.txt")
 
 app.get("/api/products/xbz", (req, res) => {
   fs.readFile(xbz_path, "utf8", (err, data) => {
@@ -27,6 +28,16 @@ app.get("/api/products/xbz", (req, res) => {
 
 app.get("/api/products/spot", (req, res) => {
   fs.readFile(spot_path, "utf-8", (err, data) => {
+    if (err) {
+      console.error("Error reading the file:", err);
+      return;
+    }
+    res.status(200).json(JSON.parse(data));
+  });
+});
+
+app.get("/api/products/somarcas", (req, res) => {
+  fs.readFile(somarcas_path, "utf-8", (err, data) => {
     if (err) {
       console.error("Error reading the file:", err);
       return;
